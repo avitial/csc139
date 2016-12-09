@@ -1,13 +1,13 @@
-FIFO
-Page 4 loaded into Frame 0
-Page 3 loaded into Frame 1
-Page 4 already loaded into Frame 0
-Page 6 loaded into Frame 2
-Page 1 loaded into Frame 3
-Page 6 already loaded into Frame 2
-Page 4 already loaded into Frame 0
-Page 4 unloaded from Frame 0, Page 5 loaded into Frame 0
-Page 4 unloaded from Frame 1, Page 2 loaded into Frame 1
-Page 3 unloaded from Frame 2, Page 4 loaded into Frame 2
-Page 4 unloaded from Frame 3, Page 6 loaded into Frame 3
-Page 6 unloaded from Frame 0, Page 1 loaded into Frame 0
+
+4: --->F  4
+3: --->F  4 3
+4:  4 3
+6: --->F  4 3 6
+1: --->F  4 3 6 1
+6:  4 3 6 1
+4:  4 3 6 1
+5: --->F  4 5 6 1
+2: --->F  4 5 6 2
+4:  4 5 6 2
+6:  4 5 6 2
+1: --->F  4 1 6 2
