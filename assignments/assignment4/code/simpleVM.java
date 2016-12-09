@@ -28,34 +28,30 @@ public class simpleVM{
 		ArrayList<Integer> str = new ArrayList<Integer>();
 
 		try{   
-			File inFile = new File("input.txt");
+			File inFile = new File("input.txt");//open input file
 			Scanner sc = new Scanner(inFile);			
-			//check for valid bit (integer)
-			while (!sc.hasNextInt()){
-				sc.next(); // discard token, which isn't a valid int
+			while (!sc.hasNextInt()){//check for valid bit (integer)
+				sc.next();//discard token, which isn't a valid int
 			}
-			pgs = sc.nextInt(); // pages
-			frm = sc.nextInt(); // frames
-			rqsts = sc.nextInt(); // page requests
+			pgs = sc.nextInt();//pages
+			frm = sc.nextInt();//frames
+			rqsts = sc.nextInt();//page requests
 			//get all the page requests
 			while(sc.hasNext()){
 				String frame = sc.next();
 				frms = Integer.parseInt(frame);
 				str.add(frms);
 			}
-			sc.close(); //close file
+			sc.close();//close file
 		}catch(FileNotFoundException e){
 			System.err.println("FileNotFoundException: " + e.getMessage());
 		}
-		//check for stringlist, cannot be empty
-		if(!str.isEmpty()){
+		if(!str.isEmpty()){//check for stringlist, cannot be empty
 			size = str.size();
 		}
-		//convert the stringlist into an array
-		Integer frame[] = new Integer[str.size()];
+		Integer frame[] = new Integer[str.size()];//convert the stringlist into an array
 		frame = str.toArray(frame);
-		//request selection of a replacement policy
-		System.out.printf("\nPage Replacement Policies:\n");
+		System.out.printf("\nPage Replacement Policies:\n");//request selection of a replacement policy
 		System.out.printf("\n1 :    FIFO\n2 :    LRU\n\n");
 		System.out.printf("\nEnter a number between 1 and 2 to choose a page replacement policy: ");
 		Scanner sc = new Scanner(System.in);
@@ -74,7 +70,7 @@ public class simpleVM{
 		   default: System.out.printf("\nInvalid entry, terminating program now.\n");   
 		}
 	}
-	///// LRU PAGE REPLACEMENT POLICY SIMULATION //////
+	/////LRU PAGE REPLACEMENT POLICY SIMULATION //////
 	public static void LRU(Integer[] page, int frm, int rqsts) throws IOException{
 		int []frame = new int[10];
 		int []usedPgs = new int[10];
@@ -129,35 +125,33 @@ public class simpleVM{
 				outfile.printf("Page %d loaded into Frame %d\n",frame[index],currFrm);
 			}
 		}
-		//close files
-		outfile.close();
+		outfile.close();//close files
 		wr.close();
-	} // END OF LRU
-	///// FIFO page replacement policy simulation //////
+	}//END OF LRU
+	/////FIFO page replacement policy simulation //////
 	public static void FIFO(Integer[] pages, int frms, int rqsts) throws IOException{
 	int i,k,loaded,cnt=0, j=0;
 	int [] frame = new int[25];
 	int oldFrame=pages[0];
 
-	BufferedWriter wr = new BufferedWriter(new FileWriter("output.txt"));
+	BufferedWriter wr = new BufferedWriter(new FileWriter("output.txt"));//create file to write output
 	PrintWriter outfile = new PrintWriter(wr);
 	System.out.printf("FIFO\n");
 	outfile.printf("FIFO\n");
 
-	//initialize frames to -1
-	for(i=0;i<frms;i++){
+	for(i=0;i<frms;i++){//initialize frames to -1
 		frame[i]= -1;
 	}
 	for(i=0;i<rqsts;i++){
 	loaded=0;
 	for(k=0;k<frms;k++)
 		if(frame[k]==pages[i]){
+			System.out.printf("Page %d already in Frame %d\n",pages[i],k);
+			outfile.printf("Page %d already in Frame %d\n",pages[i],k);
 			loaded=1;
 		}
-		//start loading pages into frames
-		if(loaded==0){
-			//wait until all frames are used to start unloading
-			if(cnt==frms){
+		if(loaded==0){//start loading pages into frames
+			if(cnt==frms){//wait until all frames are used to start unloading
 				System.out.printf("Page %d unloaded from Frame %d, ",oldFrame,j);
 				outfile.printf("Page %d unloaded from Frame %d, ",oldFrame,j);
 				oldFrame=frame[(j+1)%frms];
@@ -169,14 +163,8 @@ public class simpleVM{
 			j=(j+1) % frms;
 			cnt++;
 		}
-		//page is currently loaded in frame
-		if(loaded==1){
-			System.out.printf("Page %d already in Frame %d\n",pages[i],k);
-			outfile.printf("Page %d already in Frame %d\n",pages[i],k);
-		}
 	}
-	//close files
-	outfile.close();
+	outfile.close();//close files
 	wr.close();
-	} // END OF FIFO
-}
+	} //END OF FIFO
+}//En
