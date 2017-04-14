@@ -1,4 +1,4 @@
-#H1 csc139
+# csc139
 ======
 
 #####H4_CSC 139._ Operating System Principles. Contemporary operating system organization and structure.
